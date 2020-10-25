@@ -1,0 +1,12 @@
+<h1>ユーザー一覧</h1>
+<% @users.each do |user| %>
+    <div class = 'row'>
+      <div class = 'col-md-3 mx-auto'>
+          <div class="border border-secondary mb-3">
+            <div class="border">
+              <%= link_to(user['name'], user_path(user['id'])) %>
+            </div>
+          </div>
+    </div>
+  </div>
+<%end %>

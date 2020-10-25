@@ -11,6 +11,9 @@ services:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
       - log-data:/myapp/log
+      - bundle_path:/bundle 
+    environment:
+      - BUNDLE_PATH=/bundle 
     depends_on:
       - db
   db:
@@ -30,6 +33,7 @@ services:
     depends_on:
       - web
 volumes:
+  bundle_path:
   public-data:
   tmp-data:
   log-data:
