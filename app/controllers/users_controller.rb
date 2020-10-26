@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   require "json"
   
   def index
-    res = Faraday.get "ホスト名/api/v1/users"
+    res = Faraday.get "https://762ba92e07c0.ngrok.io/api/v1/users"
     users = JSON.parse(res.body)
     @users = []
 
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    res = Faraday.get "ホスト名/api/v1/users/#{params[:id]}"
+    res = Faraday.get "https://762ba92e07c0.ngrok.io/api/v1/users/#{params[:id]}"
     @user = JSON.parse(res.body)
   end
 
   def edit
-    res = Faraday.get "ホスト名/api/v1/users/#{params[:id]}"
+    res = Faraday.get "https://762ba92e07c0.ngrok.io/api/v1/users/#{params[:id]}"
     @user = JSON.parse(res.body)
   end
 

@@ -1,16 +1,17 @@
 <p id="notice"><%= notice %></p>
+<%= javascript_pack_tag 'users/index' %>
 
 <!-- 上部 -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>ユーザー情報一覧</h1>
+        <h1>ユーザー一覧</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><%= link_to 'ホーム' %></li>
-          <li class="breadcrumb-item active">ユーザー情報一覧</li>
+          <li class="breadcrumb-item active">ユーザー一覧</li>
         </ol>
       </div>
     </div>
@@ -27,6 +28,7 @@
             <table id="users_example" class="table table-bordered table-hover">
               <thead>
                 <tr>
+                  <th style="width:5%;">ID</th>
                   <th style="width:15%;">名前</th>
                   <th style="width:15%;">メール</th>
                   <th style="width:20%;"></th>
@@ -36,6 +38,7 @@
               <tbody>
                 <% @users.each do |user| %>
                   <tr>
+                    <td><%= user['id'] %></td>
                     <td><%= user['name'] %></td>
                     <td><%= user['email'] %></td>
                     <td><%= link_to '詳細', user_path(user['id']), class:"btn btn-outline-primary btn-sm" %>
