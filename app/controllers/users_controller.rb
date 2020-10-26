@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   def show
     res = Faraday.get "ホスト名/api/v1/users/#{params[:id]}"
     @user = JSON.parse(res.body)
-    
   end
 
   def edit
@@ -24,15 +23,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    req = Faraday.put "ホスト名/api/v1/users/#{params[:id]}"
-    body = {
-      "user": {
-        "name": "hoge"
-        "email" : 
-      }
-    }.to_json
+    # req = Faraday.put "ホスト名/api/v1/users/#{params[:id]}"
+    # body = {
+    #   "user": {
+    #     "name": "hoge"
+    #     "email" : 
+    #   }
+    # }.to_json
 
-    req.body = body
+    # req.body = body
   end
 
 end
