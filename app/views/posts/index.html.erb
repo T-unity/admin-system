@@ -1,11 +1,60 @@
-<% @posts.each do |post| %>
-    <div class = 'row'>
-      <div class = 'col-md-3 mx-auto'>
-          <div class="border border-secondary mb-3">
-            <div class="border">
-              <%= post %>
-            </div>
-          </div>
+<p id="notice"><%= notice %></p>
+<%= javascript_pack_tag 'users/index' %>
+
+<!-- 上部 -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>投稿一覧</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><%= link_to 'ホーム' %></li>
+          <li class="breadcrumb-item active">投稿一覧</li>
+        </ol>
+      </div>
     </div>
+  </div><!-- /.container-fluid -->
+</section>
+<!-- テーブル -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="users_example" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="width:5%;">ID</th>
+                  <th style="width:15%;">タイトル</th>
+                  <th style="width:20%;"></th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <% @posts.each do |post| %>
+                  <tr>
+                    <td><%= post['id'] %></td>
+                    <td><%= post['title'] %></td>
+                    <td><%= link_to '詳細', post_path(post['id']), class:"btn btn-outline-primary btn-sm" %>
+                    <%= link_to '編集', edit_post_path(post['id']), class:"btn btn-outline-primary btn-sm" %>
+                    <%= link_to '削除', post_path(post['id']), method: :delete, class:"btn btn-outline-danger btn-sm", data: { confirm: '本当によろしいでしょうか？' } %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
   </div>
-<%end %>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

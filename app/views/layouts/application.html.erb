@@ -40,6 +40,8 @@
         <div class="sidebar">
           <!-- Sidebar Menu -->
           <nav class="mt-2">
+
+            <%# ユーザー %>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link active">
@@ -49,22 +51,61 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
+
                 <ul class="nav nav-treeview">
+
                   <li class="nav-item">
                     <%= link_to "/users", class:"nav-link" do %>
                       <i class="far fa-circle nav-icon"></i>
                       <p>ユーザー情報一覧</p>
                     <% end %>
                   </li>
+
                   <li class="nav-item">
                     <%= link_to new_user_path, class:"nav-link" do %>
                       <i class="far fa-circle nav-icon"></i>
                       <p>ユーザー新規登録</p>
                     <% end %>
                   </li>
+                  
                 </ul>
+
               </li>
             </ul>
+
+            <%# 投稿 %>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-edit"></i>
+                  <p>
+                    投稿管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+
+                <ul class="nav nav-treeview">
+
+                  <li class="nav-item">
+                    <%= link_to "/posts", class:"nav-link" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>投稿一覧</p>
+                    <% end %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to new_post_path, class:"nav-link" do %>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>投稿新規登録</p>
+                    <% end %>
+                  </li>
+                  
+                </ul>
+
+              </li>
+            </ul>
+
+
           </nav>
           <!-- /.sidebar-menu -->
         </div>
@@ -83,7 +124,7 @@
       <footer class="main-footer">
         <!-- To the right -->
         <div class="float-right d-none d-sm-inline">
-          Anything you want
+          Management-System
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2020 All rights reserved.

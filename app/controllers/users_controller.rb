@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-
   require "json"
+  require 'faraday'
   
   def index
-    res = Faraday.get "ホスト名/api/v1/users"
+    res = Faraday.get "ホスト/api/v1/users"
     users = JSON.parse(res.body)
     @users = []
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    res = Faraday.get "ホスト名/api/v1/users/#{params[:id]}"
+    res = Faraday.get "ホスト/api/v1/users/#{params[:id]}"
     res_body = JSON.parse(res.body)
 
     @id = res_body["data"]["id"]
@@ -22,13 +22,35 @@ class UsersController < ApplicationController
   end
 
   def new
+    Faraday.get "ホスト/api/v1/users/new"
   end
 
   def create
+    # 値を決め打ちで指定するとPOSTできる→フォームからの値を取得できていない
+    Faraday.post "ホスト/api/v1/users",{
+      name: params[:name], 
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
+      image: params[:image],
+      remove_image: params[:remove_image],
+    }
+    redirect_to users_path
+
+    # 値を固定→フォームに値を入力しなくてもPOSTできる
+    # Faraday.post "ホスト/api/v1/users",{
+    #   name: "テスト", 
+    #   email: "#{SecureRandom.base64(6)}@example.com",
+    #   password: "hogehoge",
+    #   password_confirmation: "hogehoge",
+    #   image: params[:image],
+    #   remove_image: params[:remove_image],
+    # }
+    # redirect_to users_path
   end
 
   def edit
-    res = Faraday.get "ホスト名/api/v1/users/#{params[:id]}"
+    res = Faraday.get "ホスト/api/v1/users/#{params[:id]}"
     res_body = JSON.parse(res.body)
 
     @name = res_body["data"]["name"]
@@ -36,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    req = Faraday.put "ホスト名/api/v1/users/#{params[:id]}"
+    req = Faraday.put "ホスト/api/v1/users/#{params[:id]}"
     data = {
       "user": {
         "name" => "#{params[:name]}",
@@ -48,26 +70,21 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    Faraday.delete "ホスト名/api/v1/users/#{params[:id]}"
+    Faraday.delete "ホスト/api/v1/users/#{params[:id]}"
     redirect_to users_path
   end
 
   private
       def user_params
         params.require(:user).permit(
-            :name,
-            :email, 
+          :name,
+          :email, 
+          :email_confirmation,
+          :password, 
+          :password_confirmation,
+          :image,
+          :remove_image
           )
       end
-
-
-  # def update_customer(user_id, customer_id, body)
-  #   res = @connection.put do |req|
-  #     req.url("/admin/api/2020-07/customers/#{customer_id}.json")
-  #     req.headers["Content-Type"] = "application/json"
-  #     req.body = body
-  #   end
-  #   check_response_status(__method__, user_id, customer_id, res)
-  # end
 
 end
