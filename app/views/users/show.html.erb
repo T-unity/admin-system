@@ -1,1 +1,44 @@
-<%= @user %>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1>ユーザー情報詳細</h1>
+        </div>
+        <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><%= link_to 'ホーム', users_path %></li>
+            <li class="breadcrumb-item active">ユーザー情報詳細</li>
+        </ol>
+        </div>
+    </div>
+  </div>
+</section>
+
+<div class="card-body">
+
+  <p>
+    <strong>ID：</strong>
+    <div class="text-sm-left">
+      <%= @id %>
+    </div>
+  </p>
+
+  <p>
+    <strong>名前：</strong>
+    <div class="text-sm-left">
+      <%= @name %>
+    </div>
+  </p>
+
+  <p>
+    <strong>メールアドレス：</strong>
+    <div class="text-sm-left">
+      <%= @email %>
+    </div>
+  </p>
+
+</div>
+
+<div class="card-footer">
+  <%= link_to ' 戻る ', users_path, class:"btn btn-secondary" %>
+</div>
