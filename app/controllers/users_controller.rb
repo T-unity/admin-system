@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
+  before_action :start_faraday
   require "json"
   require 'faraday'
   
   def index
-    res = Faraday.get "ホスト/api/v1/users"
+    res = @conn.get "/api/v1/users"
     users = JSON.parse(res.body)
     @users = []
 
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    res = Faraday.get "ホスト/api/v1/users/#{params[:id]}"
+    res = @conn.get "/api/v1/users/#{params[:id]}"
     res_body = JSON.parse(res.body)
 
     @id = res_body["data"]["id"]
@@ -22,12 +23,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    Faraday.get "ホスト/api/v1/users/new"
+    @conn.get "/api/v1/users/new"
   end
 
   def create
-    # 値を決め打ちで指定するとPOSTできる→フォームからの値を取得できていない
-    Faraday.post "ホスト/api/v1/users",{
+    @conn.post "/api/v1/users",{
       name: params[:name], 
       email: params[:email],
       password: params[:password],
@@ -36,21 +36,10 @@ class UsersController < ApplicationController
       remove_image: params[:remove_image],
     }
     redirect_to users_path
-
-    # 値を固定→フォームに値を入力しなくてもPOSTできる
-    # Faraday.post "ホスト/api/v1/users",{
-    #   name: "テスト", 
-    #   email: "#{SecureRandom.base64(6)}@example.com",
-    #   password: "hogehoge",
-    #   password_confirmation: "hogehoge",
-    #   image: params[:image],
-    #   remove_image: params[:remove_image],
-    # }
-    # redirect_to users_path
   end
 
   def edit
-    res = Faraday.get "ホスト/api/v1/users/#{params[:id]}"
+    res = @conn.get "/api/v1/users/#{params[:id]}"
     res_body = JSON.parse(res.body)
 
     @name = res_body["data"]["name"]
@@ -58,23 +47,29 @@ class UsersController < ApplicationController
   end
 
   def update
-    req = Faraday.put "ホスト/api/v1/users/#{params[:id]}"
-    data = {
-      "user": {
-        "name" => "#{params[:name]}",
-        "email" => "#{params[:email]}",
-      }
-    }.to_json
+    # req = @conn.put "/api/v1/users/#{params[:id]}",{
+    #   name: params[:name], 
+    #   email: params[:email],
+    # }
+    # redirect_to users_path
 
-    req.body = data
+    @conn.put "/api/v1/users/#{params[:id]}",{
+      name: "jiro", 
+      email: "v2@example.com",
+    }
+    redirect_to users_path
   end
 
   def destroy
-    Faraday.delete "ホスト/api/v1/users/#{params[:id]}"
+    @conn.delete "/api/v1/users/#{params[:id]}"
     redirect_to users_path
   end
 
   private
+      def start_faraday
+        @conn = Faraday.new(:url => 'ホスト名')
+      end
+
       def user_params
         params.require(:user).permit(
           :name,
