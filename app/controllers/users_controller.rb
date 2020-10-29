@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   private
       def start_faraday
-        @conn = Faraday.new(:url => 'ホスト名')
+        @conn = Faraday.new 'ホスト名'
       end
 
       def user_params
