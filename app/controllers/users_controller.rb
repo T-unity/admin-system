@@ -47,17 +47,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    # req = @conn.put "/api/v1/users/#{params[:id]}",{
-    #   name: params[:name], 
-    #   email: params[:email],
+    @conn.put "/api/v1/users/#{params[:id]}",{
+      name: params[:name], 
+      email: params[:email],
+    }
+    redirect_to users_path
+
+    # @conn.put "/api/v1/users/#{params[:id]}",{
+    #   name: "triro", 
+    #   email: "v4@example.com",
     # }
     # redirect_to users_path
 
-    @conn.put "/api/v1/users/#{params[:id]}",{
-      name: "jiro", 
-      email: "v2@example.com",
-    }
-    redirect_to users_path
+    # @conn.put "/api/v1/users/#{params[:id]}" do |req|
+    #   req.body = {
+    #   name: "jiro", 
+    #   email: "v2@example.com",
+    # }
+    # end
+    # redirect_to users_path
   end
 
   def destroy
