@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   before_action :start_faraday
-  require "json"
-  require 'faraday'
   
   def index
     res = @conn.get "/api/v1/users"
