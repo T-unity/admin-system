@@ -1,0 +1,63 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1>投稿情報編集</h1>
+        </div>
+        <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><%= link_to 'ホーム' %></li>
+            <li class="breadcrumb-item active">投稿情報編集</li>
+        </ol>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="content">
+<%= form_with(url: post_path,method: :put,  local: true) do |f| %>
+  <div class="card-body">
+  
+    <div class="form-group col-sm-6">
+      <%= f.label :タイトル： %><span class="badge badge-danger">必須</span>
+      <%= f.text_field :title, class:"form-control", placeholder: @title %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :お仕事概要： %>
+      <%= f.text_area :about, class:"form-control", placeholder: @about  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :お仕事詳細： %>
+      <%= f.text_area :job, class:"form-control", placeholder: @job  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :必要スキル： %>
+      <%= f.text_area :skill, class:"form-control", placeholder: @skill  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :お仕事の頻度： %>
+      <%= f.text_area :frequency, class:"form-control", placeholder: @frequency  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :待遇： %>
+      <%= f.text_area :treat, class:"form-control", placeholder: @treat  %>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <%= f.label :その他： %>
+      <%= f.text_area :other, class:"form-control", placeholder: @other  %>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <%= f.submit "保存", class:"btn btn-primary" %>
+  </div>
+<% end %>
+</section>
