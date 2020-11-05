@@ -22,6 +22,10 @@ services:
       - ./environments/db.env
     volumes:
       - db-data:/var/lib/mysql
+    environment:
+      MYSQL_USER: user_name
+      MYSQL_ROOT_PASSWORD: db_root_password
+      MYSQL_PASSWORD: = user_password
   nginx:
     build:
       context: containers/nginx
