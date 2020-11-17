@@ -1,6 +1,6 @@
 ## アプリ概要
 
-本体アプリ （https://github.com/T-unity/seamless） の管理画面アプリです。
+本体アプリ https://github.com/T-unity/seamless の管理画面アプリです。
 
 本体とAPIで連携、リクエストを送り本体からjson形式でデータを取得します。
 
